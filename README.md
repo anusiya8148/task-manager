@@ -67,7 +67,7 @@ task-manager/
 ## ⚙️ Installation & Run Locally
 
 ### 1️⃣ Clone the Repository
-
+https://github.com/anusiya8148/task-manager.git
 
 ### 2️⃣ Install Dependencies
 pip install -r requirements.txt
