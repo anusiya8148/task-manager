@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <h1 class="dashboard-title">To Do App</h1>
+
+    <div class="task-input">
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="Enter a task here" required>
+            <button type="submit" class="save-btn">SAVE</button>
+        </form>
+
+        <a href="/dashboard">
+            <button class="get-btn">GET TASKS</button>
+        </a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Todo Item</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ task[2] }}</td>
+
+                <td>
+                    {% if task[3] == "Completed" %}
+                        <span class="completed-text">Finished</span>
+                    {% else %}
+                        <span class="progress-text">In Progress</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="/delete/{{ task[0] }}">
+                        <button class="delete-btn">DELETE</button>
+                    </a>
+
+                    <a href="/update/{{ task[0] }}">
+                        {% if task[3] == "Incomplete" %}
+                            <button class="finish-btn">FINISHED</button>
+                        {% else %}
+                            <button class="finish-btn">UNDO</button>
+                        {% endif %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+</div>
+
+</body>
+</html>
